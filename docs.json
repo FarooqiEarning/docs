@@ -34,7 +34,12 @@
           {
             "group": "Endpoints",
             "pages": [
-              "api-reference/endpoints/get-session-health"
+              {
+                "group": "Messages",
+                "pages": [
+                  "api-reference/endpoints/messages/send-text-message"
+                ]
+              }
             ]
           }
         ]

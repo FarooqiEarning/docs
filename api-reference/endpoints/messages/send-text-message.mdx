@@ -1,0 +1,33 @@
+---
+title: "Send Text Message - Converso Whatsapp Api"
+---
+
+<CodeGroup>
+
+```shellscript cURL
+curl --request POST \
+  --url http://localhost:7870/api/v1/messages/send/text \
+  --header 'Content-Type: application/json' \
+  --header 'x-session-secret: 92369e1c45f4733cd7827a07a1042b8ef5f88fdc270e0271aace87f15b201605' \
+  --data '
+{
+  "sessionId": "dfd5fa6e-5536-42aa-8544-116bfe0f14e3",
+  "to": "923164525711",
+  "message": "Hello! This is a test message from Converso Whatsapp API."
+}
+'
+```
+
+
+``` Python
+```
+
+
+``` JavaScript
+```
+
+
+``` TypeScript
+```
+
+</CodeGroup>
