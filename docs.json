@@ -18,7 +18,10 @@
             "pages": [
               "converso-audio-extract-api/api-reference/api/create-extraction-job",
               "converso-audio-extract-api/api-reference/get-job-status",
-              "converso-audio-extract-api/api-reference/download-audio"
+              "converso-audio-extract-api/api-reference/download-audio",
+              "converso-audio-extract-api/api-reference/batch-processing",
+              "converso-audio-extract-api/api-reference/webhooks",
+              "converso-audio-extract-api/api-reference/errors-reference"
             ]
           }
         ]

@@ -1,0 +1,158 @@
+---
+title: "Webhooks"
+description: "Event notifications for job completion and failure in Converso Audio Extraction API"
+---
+
+## Overview
+
+Webhooks allow your system to **receive real-time notifications** when audio extraction jobs complete or fail.  
+Instead of polling the status endpoint repeatedly, you can have the API push updates to your server.
+
+> ⚡ Recommended for production workloads
+
+---
+
+## Configuring Webhooks
+
+You can provide a **webhook URL** in the `options` object when creating a job:
+
+```json
+{
+  "source": { "type": "url", "url": "https://example.com/video.mp4" },
+  "output": { "format": "mp3" },
+  "options": {
+    "webhook": "https://example.com/webhook"
+  }
+}
+```
+
+For **batch jobs**, the webhook URL applies to all jobs in the batch.
+
+---
+
+## Event Types
+
+| Event           | Description                                                   |
+| --------------- | ------------------------------------------------------------- |
+| `job.completed` | Job successfully finished and audio is available for download |
+| `job.failed`    | Job failed during processing, includes error information      |
+
+---
+
+## Webhook Payload
+
+All webhook events use the same JSON structure.
+
+### Job Completed Example
+
+```json
+{
+  "event": "job.completed",
+  "jobId": "job_a1b2c3d4e5f6g7h8",
+  "status": "completed",
+  "timestamp": "2026-01-21T12:34:56Z",
+  "downloadUrl": "/audio-extract/v1/download/job_a1b2c3d4e5f6g7h8",
+  "outputFile": {
+    "filename": "my-audio-file.mp3",
+    "url": "https://cdn.conversoempire.world/audio/job_a1b2c3d4e5f6g7h8/my-audio-file.mp3",
+    "size": 4824000,
+    "duration": 120.5,
+    "format": "mp3",
+    "bitrate": "192k"
+  }
+}
+```
+
+### Job Failed Example
+
+```json
+{
+  "event": "job.failed",
+  "jobId": "job_a1b2c3d4e5f6g7h8",
+  "status": "failed",
+  "timestamp": "2026-01-21T12:35:10Z",
+  "error": {
+    "code": "EXTRACTION_FAILED",
+    "message": "Audio extraction failed due to unsupported codec",
+    "details": "Video codec VP9 is not supported in FLAC output"
+  }
+}
+```
+
+---
+
+## Payload Fields
+
+| Field         | Type              | Description                                         |
+| ------------- | ----------------- | --------------------------------------------------- |
+| `event`       | string            | `job.completed` or `job.failed`                     |
+| `jobId`       | string            | Unique job identifier                               |
+| `status`      | string            | Final job status                                    |
+| `timestamp`   | string (ISO 8601) | Time event was triggered                            |
+| `downloadUrl` | string            | Relative path to download file (for completed jobs) |
+| `outputFile`  | object            | Detailed output file info (completed jobs only)     |
+| `error`       | object            | Error details (failed jobs only)                    |
+
+---
+
+## Output File Object
+
+| Field      | Type    | Description                 |
+| ---------- | ------- | --------------------------- |
+| `filename` | string  | Output file name            |
+| `url`      | string  | Public CDN URL for download |
+| `size`     | integer | File size in bytes          |
+| `duration` | number  | Duration in seconds         |
+| `format`   | string  | Audio format                |
+| `bitrate`  | string  | Bitrate (e.g., `192k`)      |
+
+---
+
+## Error Object
+
+| Field     | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| `code`    | string | Error code for programmatic handling |
+| `message` | string | Human-readable message               |
+| `details` | string | Optional additional info             |
+
+---
+
+## Webhook Best Practices
+
+* Validate incoming requests to ensure they originate from **Converso Empire** (use secret headers or tokens)
+* Respond with **HTTP 200 OK** quickly to avoid retries
+* Log events for auditing and debugging
+* Use job IDs to correlate with internal systems
+* Handle `job.failed` gracefully and trigger retries if necessary
+
+---
+
+## Example Webhook Integration (Node.js)
+
+```javascript
+app.post("/webhook", express.json(), (req, res) => {
+  const payload = req.body;
+
+  if (payload.event === "job.completed") {
+    console.log(`Job ${payload.jobId} completed`);
+    console.log(`Download: ${payload.outputFile.url}`);
+  } else if (payload.event === "job.failed") {
+    console.error(`Job ${payload.jobId} failed: ${payload.error.message}`);
+  }
+
+  res.status(200).send("Received");
+});
+```
+
+---
+
+## Next Step
+
+<Card title="Errors Reference" icon="triangle-exclamation" href="/converso-audio-extract-api/api-reference/errors-reference">
+  Learn about error codes and troubleshooting for all endpoints.
+</Card>
+
+---
+
+© Converso Empire. All rights reserved.

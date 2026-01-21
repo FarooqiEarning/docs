@@ -39,8 +39,7 @@ Unauthorized requests will return `401 Unauthorized`.
 
 ## Response
 
-The endpoint returns the **audio file directly**.
-The `Content-Type` matches the requested output format.
+The endpoint returns the **audio file directly**. The `Content-Type` matches the requested output format.
 
 ### Supported Audio Formats
 
@@ -79,9 +78,9 @@ curl -X GET "https://api.conversoempire.world/audio-extract/v1/download/job_a1b2
 
 ## Example Response – Success
 
-* HTTP 200 OK
-* Binary audio content streamed directly to client
-* Headers indicate filename, content type, and length
+- HTTP 200 OK
+- Binary audio content streamed directly to client
+- Headers indicate filename, content type, and length
 
 ```
 HTTP/1.1 200 OK
@@ -104,7 +103,7 @@ Content-Length: 4824000
 }
 ```
 
-* HTTP 202 Accepted
+- HTTP 202 Accepted
 
 ---
 
@@ -120,7 +119,7 @@ Content-Length: 4824000
 }
 ```
 
-* HTTP 410 Gone
+- HTTP 410 Gone
 
 ---
 
@@ -136,29 +135,24 @@ Content-Length: 4824000
 }
 ```
 
-* HTTP 404 Not Found
+- HTTP 404 Not Found
 
 ---
 
 ## Best Practices
 
-* Always check **status** before downloading; only completed jobs are available.
-* Use the `statusUrl` from the job creation response to confirm completion.
-* Consider **streaming** large files instead of downloading entirely in memory.
-* Save files locally immediately; files are removed after 24 hours.
-* Handle errors gracefully (`JOB_NOT_COMPLETED`, `FILE_EXPIRED`, `JOB_NOT_FOUND`).
+- Always check **status** before downloading; only completed jobs are available.
+- Use the `statusUrl` from the job creation response to confirm completion.
+- Consider **streaming** large files instead of downloading entirely in memory.
+- Save files locally immediately; files are removed after 24 hours.
+- Handle errors gracefully (`JOB_NOT_COMPLETED`, `FILE_EXPIRED`, `JOB_NOT_FOUND`).
 
 ---
 
 ## Next Step
 
-<Card
-  title="Batch Processing"
-  icon="layer-group"
-  href="/converso-audio-extraction/api-reference/batch"
->
-
-Process multiple audio extraction jobs in a single request. 
+<Card title="Batch Processing" icon="layer-group" href="/converso-audio-extract-api/api-reference/batch-processing">
+  Process multiple audio extraction jobs in a single request.
 </Card>
 
 ---

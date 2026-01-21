@@ -1,0 +1,198 @@
+---
+title: "Batch Processing"
+description: "Submit and manage multiple audio extraction jobs in a single request"
+---
+
+## Endpoint
+
+```http
+POST /v1/batch
+```
+
+The **Batch Processing** endpoint allows you to submit up to **10 extraction jobs** in one API request. This reduces overhead, improves efficiency, and simplifies webhook notifications for multiple jobs.
+
+---
+
+## Authentication
+
+All requests require an API key:
+
+```http
+X-API-Key: YOUR_API_KEY
+```
+
+Unauthorized requests return `401 Unauthorized`.
+
+---
+
+## Request Body
+
+The request body must be JSON and include the `jobs` array. You may also optionally provide a **webhook URL** to receive notifications for all jobs in the batch.
+
+### Structure
+
+```json
+{
+  "jobs": [
+    {
+      "source": { "type": "url", "url": "https://example.com/video1.mp4" },
+      "output": { "format": "mp3", "quality": "high" }
+    },
+    {
+      "source": { "type": "url", "url": "https://example.com/video2.mp4" },
+      "output": { "format": "flac", "normalize": true }
+    }
+  ],
+  "webhook": "https://example.com/batch-webhook"
+}
+```
+
+---
+
+## Fields
+
+| Field     | Type   | Required | Description                                           |
+| --------- | ------ | -------- | ----------------------------------------------------- |
+| `jobs`    | array  | ✅        | Array of extraction job objects (max 10)              |
+| `webhook` | string | ❌        | Optional webhook URL to receive job completion events |
+
+### Job Object
+
+Each job must include:
+
+- `source` — Video source configuration (URL or upload)
+- `output` — Audio output configuration
+- `options` (optional) — Job-level options like filename or priority
+
+---
+
+## Example Requests
+
+### Simple Batch
+
+```json
+{
+  "jobs": [
+    {
+      "source": { "type": "url", "url": "https://example.com/video1.mp4" },
+      "output": { "format": "mp3", "quality": "high" }
+    },
+    {
+      "source": { "type": "url", "url": "https://example.com/video2.mp4" },
+      "output": { "format": "aac", "bitrate": "256k" }
+    }
+  ]
+}
+```
+
+### Batch with Webhook
+
+```json
+{
+  "jobs": [
+    {
+      "source": { "type": "url", "url": "https://example.com/video1.mp4" },
+      "output": { "format": "mp3", "quality": "medium" }
+    },
+    {
+      "source": { "type": "url", "url": "https://example.com/video2.mp4" },
+      "output": { "format": "flac", "normalize": true }
+    }
+  ],
+  "webhook": "https://example.com/batch-webhook"
+}
+```
+
+---
+
+## Response
+
+### Success (202 Accepted)
+
+```json
+{
+  "success": true,
+  "data": {
+    "batchId": "batch_x1y2z3a4b5c6d7e8",
+    "totalJobs": 2,
+    "jobs": [
+      { "jobId": "job_1a2b3c4d5e6f7g8h", "status": "queued" },
+      { "jobId": "job_9i0j1k2l3m4n5o6p", "status": "queued" }
+    ]
+  },
+  "message": "Batch jobs queued successfully"
+}
+```
+
+| Field       | Description                                            |
+| ----------- | ------------------------------------------------------ |
+| `batchId`   | Unique identifier for the batch                        |
+| `totalJobs` | Number of jobs submitted in this batch                 |
+| `jobs`      | Array of job objects with `jobId` and initial `status` |
+
+---
+
+## Error Responses
+
+### 400 – Invalid Request
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "INVALID_REQUEST",
+    "message": "Too many jobs in batch (max 10)"
+  }
+}
+```
+
+### 503 – Service Unavailable
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "QUEUE_FULL",
+    "message": "Processing queue is currently full"
+  }
+}
+```
+
+---
+
+## Webhook Notifications
+
+If a webhook URL is provided, you will receive a notification for **each job in the batch**:
+
+```json
+{
+  "event": "job.completed",
+  "jobId": "job_1a2b3c4d5e6f7g8h",
+  "status": "completed",
+  "downloadUrl": "/audio-extract/v1/download/job_1a2b3c4d5e6f7g8h"
+}
+```
+
+> Use the `jobId` to track individual jobs in the batch.
+
+---
+
+## Best Practices
+
+- Maximum **10 jobs per batch**
+- Submit batch jobs to reduce overhead instead of multiple single-job requests
+- Use **webhooks** instead of polling for efficiency
+- Track each job using `GET /v1/status/{jobId}` if needed
+- Handle failures per job, not per batch
+
+---
+
+## Next Step
+
+<Card title="Webhooks" icon="bell" href="/converso-audio-extract-api/api-reference/webhooks">
+  Learn about webhook events for job completion and failure notifications.
+</Card>
+
+---
+
+© Converso Empire. All rights reserved.

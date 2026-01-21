@@ -1,0 +1,122 @@
+---
+title: "Errors Reference"
+description: "All error codes and troubleshooting for Converso Audio Extraction API"
+---
+
+## Overview
+
+This page consolidates all **error responses** you may encounter when using the Converso Audio Extraction API.\
+Each error includes:
+
+- **Error code**
+- **HTTP status**
+- **Meaning / cause**
+- **Suggested solution**
+
+All endpoints follow the **standard response envelope**:
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "ERROR_CODE",
+    "message": "Human-readable message",
+    "details": "Optional extra information"
+  }
+}
+```
+
+---
+
+## Authentication Errors
+
+| Code           | HTTP Status | Description                  | Suggested Action                                 |
+| -------------- | ----------- | ---------------------------- | ------------------------------------------------ |
+| `UNAUTHORIZED` | 401         | API key missing or invalid   | Verify your API key in `X-API-Key` header        |
+| `FORBIDDEN`    | 403         | API key does not have access | Check subscription plan and endpoint permissions |
+
+---
+
+## Request Errors
+
+| Code              | HTTP Status | Description                                        | Suggested Action                              |
+| ----------------- | ----------- | -------------------------------------------------- | --------------------------------------------- |
+| `INVALID_REQUEST` | 400         | Request payload invalid or missing required fields | Validate JSON body and required fields        |
+| `INVALID_SOURCE`  | 400         | Video source type or URL is invalid                | Correct `source.type` and `source.url`        |
+| `INVALID_JOB_ID`  | 400         | Job ID format invalid                              | Use valid `job_<16 hex>` ID                   |
+| `TOO_MANY_JOBS`   | 400         | Batch exceeds max limit (10 jobs)                  | Reduce batch size                             |
+| `INVALID_OUTPUT`  | 400         | Output format or options invalid                   | Correct `output.format`, `quality`, `bitrate` |
+
+---
+
+## Job & Processing Errors
+
+| Code                | HTTP Status | Description                         | Suggested Action                                   |
+| ------------------- | ----------- | ----------------------------------- | -------------------------------------------------- |
+| `JOB_NOT_FOUND`     | 404         | Job ID does not exist               | Verify the job ID returned from `POST /v1/extract` |
+| `JOB_NOT_COMPLETED` | 202         | Job not finished yet                | Poll status endpoint or wait for webhook           |
+| `EXTRACTION_FAILED` | 200/202     | Audio extraction failed             | Check video format, codecs, or try again           |
+| `DOWNLOAD_FAILED`   | 200/202     | Unable to download video from URL   | Verify the URL is public and reachable             |
+| `INVALID_VIDEO`     | 400         | Video file corrupted or unsupported | Provide a valid video file                         |
+| `FILE_EXPIRED`      | 410         | Extracted file no longer available  | Download file immediately after completion         |
+
+---
+
+## System & Server Errors
+
+| Code                  | HTTP Status | Description                          | Suggested Action                                 |
+| --------------------- | ----------- | ------------------------------------ | ------------------------------------------------ |
+| `QUEUE_FULL`          | 503         | Processing queue is temporarily full | Retry after a few seconds                        |
+| `SERVICE_UNAVAILABLE` | 503         | API temporarily unavailable          | Retry later or check status page                 |
+| `INTERNAL_ERROR`      | 500         | Unexpected server error              | Contact support with `jobId` and request details |
+
+---
+
+## Webhook Errors
+
+| Code              | Description                           | Suggested Action                                       |
+| ----------------- | ------------------------------------- | ------------------------------------------------------ |
+| `INVALID_WEBHOOK` | Webhook URL is unreachable or invalid | Verify URL is public and responds with 2xx             |
+| `WEBHOOK_FAILED`  | Webhook delivery failed               | Retry webhook delivery manually or check endpoint logs |
+
+---
+
+## Example Error Response
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "EXTRACTION_FAILED",
+    "message": "Audio extraction failed due to unsupported codec",
+    "details": "Video codec VP9 is not supported in FLAC output"
+  }
+}
+```
+
+---
+
+## Best Practices
+
+- Always check the `success` field before processing responses
+- Implement **retry logic** for transient errors (`QUEUE_FULL`, `SERVICE_UNAVAILABLE`)
+- Validate request payloads to avoid `INVALID_REQUEST` and `INVALID_OUTPUT`
+- Poll or use **webhooks** instead of repeated failed downloads
+- Log errors with `jobId` for support troubleshooting
+
+---
+
+## Next Step
+
+<Card
+  title="API Introduction"
+  icon="rocket"
+  href="/converso-audio-extraction/introduction"
+>
+
+Return to the Converso Audio Extraction API overview. 
+</Card>
+
+---
+
+© Converso Empire. All rights reserved.
