@@ -1,0 +1,184 @@
+---
+title: "Get Job Status"
+description: "Retrieve the current status and details of an audio extraction job"
+---
+
+## Endpoint
+
+```http
+GET /v1/status/{jobId}
+```
+
+Use this endpoint to **check the progress and details** of a previously submitted extraction job.
+
+---
+
+## Authentication
+
+All requests require a valid API key:
+
+```http
+X-API-Key: YOUR_API_KEY
+```
+
+Unauthorized requests will return `401 Unauthorized`.
+
+---
+
+## URL Parameters
+
+| Parameter | Type   | Required | Description                                               |
+| --------- | ------ | -------- | --------------------------------------------------------- |
+| `jobId`   | string | ✅        | Unique identifier returned from the job creation endpoint |
+
+> Job IDs follow the pattern: `job_<16 hex characters>`, e.g., `job_a1b2c3d4e5f6g7h8`.
+
+---
+
+## Description
+
+The **Get Job Status** endpoint allows you to:
+
+- Monitor real-time progress of extraction jobs
+- See the current processing step
+- Retrieve job metadata
+- Determine when a job is completed and ready for download
+
+---
+
+## Job Status Values
+
+| Status       | Description                    |
+| ------------ | ------------------------------ |
+| `queued`     | Job is waiting to be processed |
+| `processing` | Job is actively running        |
+| `completed`  | Job finished successfully      |
+| `failed`     | Job encountered an error       |
+
+---
+
+## Current Processing Steps
+
+| Step                | Description                                    |
+| ------------------- | ---------------------------------------------- |
+| `downloading_video` | Downloading the video from the source          |
+| `analyzing_video`   | Analyzing video duration, codec, and format    |
+| `extracting_audio`  | Converting video to the requested audio format |
+| `finalizing`        | Completing job and preparing download URL      |
+
+---
+
+## Example Request
+
+```http
+GET /v1/status/job_a1b2c3d4e5f6g7h8
+X-API-Key: YOUR_API_KEY
+```
+
+---
+
+## Example Response – Processing
+
+```json
+{
+  "success": true,
+  "data": {
+    "jobId": "job_a1b2c3d4e5f6g7h8",
+    "status": "processing",
+    "progress": 65,
+    "currentStep": "extracting_audio",
+    "estimatedTimeRemaining": 15,
+    "inputFile": {
+      "name": "video.mp4",
+      "size": 104857600,
+      "duration": 120.5,
+      "format": "mp4"
+    },
+    "outputFile": null,
+    "options": {
+      "filename": "my-audio-file",
+      "webhook": "https://example.com/webhook",
+      "priority": "normal"
+    }
+  }
+}
+```
+
+---
+
+## Example Response – Completed
+
+```json
+{
+  "success": true,
+  "data": {
+    "jobId": "job_a1b2c3d4e5f6g7h8",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": "finalizing",
+    "inputFile": {
+      "name": "video.mp4",
+      "size": 104857600,
+      "duration": 120.5,
+      "format": "mp4"
+    },
+    "outputFile": {
+      "filename": "my-audio-file.mp3",
+      "url": "https://cdn.conversoempire.world/audio/job_a1b2c3d4e5f6g7h8/my-audio-file.mp3",
+      "size": 4824000,
+      "duration": 120.5,
+      "format": "mp3",
+      "bitrate": "192k"
+    },
+    "options": {
+      "filename": "my-audio-file",
+      "webhook": "https://example.com/webhook",
+      "priority": "normal"
+    }
+  }
+}
+```
+
+---
+
+## Example Response – Failed
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "EXTRACTION_FAILED",
+    "message": "Audio extraction failed due to unsupported codec",
+    "details": "Video codec VP9 is not supported in FLAC output"
+  }
+}
+```
+
+---
+
+## Progress Recommendations
+
+- Poll **every 2–5 seconds** while job is processing
+- Stop polling once status is `completed` or `failed`
+- For production, **use webhooks** to avoid unnecessary API calls
+
+---
+
+## Best Practices
+
+- Always handle `failed` jobs gracefully
+- Check `progress` and `currentStep` for UI updates
+- Use the `statusUrl` returned from `POST /v1/extract` for consistency
+- Combine with **Download Audio endpoint** once `status = completed`
+
+---
+
+## Next Step
+
+<Card title="Download Audio" icon="download" href="/converso-audio-extract-api/api-reference/download-audio">
+  Retrieve the extracted audio file for completed jobs.
+</Card>
+
+---
+
+© Converso Empire. All rights reserved.

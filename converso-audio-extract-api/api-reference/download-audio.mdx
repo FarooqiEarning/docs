@@ -1,0 +1,166 @@
+---
+title: "Download Audio"
+description: "Download the extracted audio file from a completed job"
+---
+
+## Endpoint
+
+```http
+GET /v1/download/{jobId}
+```
+
+Use this endpoint to **download the extracted audio file** once a job has completed successfully.
+
+> ⚠️ Files are only available for **24 hours** after job completion.
+
+---
+
+## Authentication
+
+This endpoint requires a valid API key:
+
+```http
+X-API-Key: YOUR_API_KEY
+```
+
+Unauthorized requests will return `401 Unauthorized`.
+
+---
+
+## URL Parameters
+
+| Parameter | Type   | Required | Description                                                        |
+| --------- | ------ | -------- | ------------------------------------------------------------------ |
+| `jobId`   | string | ✅        | Unique identifier returned from the Create Extraction Job endpoint |
+
+> Example: `job_a1b2c3d4e5f6g7h8`
+
+---
+
+## Response
+
+The endpoint returns the **audio file directly**.
+The `Content-Type` matches the requested output format.
+
+### Supported Audio Formats
+
+| Format | Content-Type | Description           |
+| ------ | ------------ | --------------------- |
+| MP3    | `audio/mpeg` | MPEG Layer III        |
+| AAC    | `audio/aac`  | Advanced Audio Coding |
+| FLAC   | `audio/flac` | Lossless audio        |
+| WAV    | `audio/wav`  | Uncompressed          |
+| OGG    | `audio/ogg`  | Ogg Vorbis            |
+| OPUS   | `audio/opus` | Opus codec            |
+
+---
+
+## Response Headers
+
+| Header                | Description                                                             |
+| --------------------- | ----------------------------------------------------------------------- |
+| `Content-Disposition` | Contains the filename, e.g., `attachment; filename="my-audio-file.mp3"` |
+| `Content-Type`        | Audio MIME type (`audio/mpeg`, `audio/flac`, etc.)                      |
+| `Content-Length`      | Size of the file in bytes                                               |
+
+---
+
+## Example Request
+
+```bash
+curl -X GET "https://api.conversoempire.world/audio-extract/v1/download/job_a1b2c3d4e5f6g7h8" \
+  -H "X-API-Key: YOUR_API_KEY" \
+  -o my-audio-file.mp3
+```
+
+> `-o` option saves the audio file locally.
+
+---
+
+## Example Response – Success
+
+* HTTP 200 OK
+* Binary audio content streamed directly to client
+* Headers indicate filename, content type, and length
+
+```
+HTTP/1.1 200 OK
+Content-Type: audio/mpeg
+Content-Disposition: attachment; filename="my-audio-file.mp3"
+Content-Length: 4824000
+```
+
+---
+
+## Example Response – Job Not Completed
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "JOB_NOT_COMPLETED",
+    "message": "The extraction job is not yet completed. Try again later."
+  }
+}
+```
+
+* HTTP 202 Accepted
+
+---
+
+## Example Response – File Expired
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "FILE_EXPIRED",
+    "message": "The extracted audio file has expired and is no longer available."
+  }
+}
+```
+
+* HTTP 410 Gone
+
+---
+
+## Example Response – Job Not Found
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "JOB_NOT_FOUND",
+    "message": "The specified job ID does not exist."
+  }
+}
+```
+
+* HTTP 404 Not Found
+
+---
+
+## Best Practices
+
+* Always check **status** before downloading; only completed jobs are available.
+* Use the `statusUrl` from the job creation response to confirm completion.
+* Consider **streaming** large files instead of downloading entirely in memory.
+* Save files locally immediately; files are removed after 24 hours.
+* Handle errors gracefully (`JOB_NOT_COMPLETED`, `FILE_EXPIRED`, `JOB_NOT_FOUND`).
+
+---
+
+## Next Step
+
+<Card
+  title="Batch Processing"
+  icon="layer-group"
+  href="/converso-audio-extraction/api-reference/batch"
+>
+
+Process multiple audio extraction jobs in a single request. 
+</Card>
+
+---
+
+© Converso Empire. All rights reserved.
