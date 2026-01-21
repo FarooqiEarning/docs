@@ -1,42 +1,86 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "almond",
-  "name": "Converso Whatsapp Api - Converso Empire",
+  "name": "Documentation - Converso Empire",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
     "dark": "#15803D"
   },
   "navigation": {
-    "tabs": [
+    "products": [
       {
-        "tab": "Guides",
-        "groups": [
+        "product": "Converso Empire",
+        "tabs": [
           {
-            "group": "Getting started",
-            "pages": [
-              "index",
-              "quickstart"
+            "tab": "Guides",
+            "groups": [
+              {
+                "group": "Getting started",
+                "pages": [
+                  "index",
+                  "quickstart"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "API reference",
+            "groups": [
+              {
+                "group": "API documentation",
+                "pages": [
+                  "api-reference/introduction"
+                ]
+              },
+              {
+                "group": "Endpoints",
+                "pages": [
+                  {
+                    "group": "Messages",
+                    "pages": [
+                      "api-reference/endpoints/messages/send-text-message"
+                    ]
+                  }
+                ]
+              }
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
-        "groups": [
+        "product": "Converso Whatsapp Api",
+        "tabs": [
           {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
+            "tab": "Guides",
+            "groups": [
+              {
+                "group": "Getting started",
+                "pages": [
+                  "index-copied-1",
+                  "quickstart-copied-1"
+                ]
+              }
             ]
           },
           {
-            "group": "Endpoints",
-            "pages": [
+            "tab": "API reference",
+            "groups": [
               {
-                "group": "Messages",
+                "group": "API documentation",
                 "pages": [
-                  "api-reference/endpoints/messages/send-text-message"
+                  "api-reference/introduction-copied-1"
+                ]
+              },
+              {
+                "group": "Endpoints",
+                "pages": [
+                  {
+                    "group": "Messages",
+                    "pages": [
+                      "api-reference/endpoints/messages/send-text-message-copied-1"
+                    ]
+                  }
                 ]
               }
             ]
@@ -49,7 +93,7 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@conversowmpire.world"
       }
     ],
     "primary": {
@@ -72,9 +116,16 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "github": "https://github.com/Converso-Empire"
+    }
+  },
+  "appearance": {
+    "strict": true,
+    "default": "dark"
+  },
+  "api": {
+    "playground": {
+      "display": "interactive"
     }
   }
 }
