@@ -1,6 +1,7 @@
 ---
 title: "Create Extraction Job"
 description: "Submit a new audio extraction job from a video source"
+keywords: ["Create Extraction Job, POST, Create, Extraction"]
 ---
 
 ## Endpoint
@@ -9,8 +10,7 @@ description: "Submit a new audio extraction job from a video source"
 POST /v1/extract
 ```
 
-Submits a new **audio extraction job**.
-The request is processed **asynchronously** and returns immediately with a job ID.
+Submits a new **audio extraction job**. The request is processed **asynchronously** and returns immediately with a job ID.
 
 ---
 
@@ -236,31 +236,27 @@ Optional job-level settings.
 
 ## Limits & Constraints
 
-* Max file size: **5 GB**
-* Max URL length: **2048 characters**
-* Files retained: **24 hours**
-* Upload source: **planned (not yet available)**
+- Max file size: **5 GB**
+- Max URL length: **2048 characters**
+- Files retained: **24 hours**
+- Upload source: **planned (not yet available)**
 
 ---
 
 ## Best Practices
 
-* ✅ Prefer **webhooks** over polling
-* 🔁 Retry failures with exponential backoff
-* 📦 Use **batch API** for multiple files
-* 🔐 Keep API keys secure
-* ⏳ Expect longer processing for large videos
+- ✅ Prefer **webhooks** over polling
+- 🔁 Retry failures with exponential backoff
+- 📦 Use **batch API** for multiple files
+- 🔐 Keep API keys secure
+- ⏳ Expect longer processing for large videos
 
 ---
 
 ## Next Step
 
-<Card
-  title="Get Job Status"
-  icon="spinner"
-  href="/converso-audio-extraction/api-reference/status"
->
-Track progress and retrieve job details.
+<Card title="Get Job Status" icon="spinner" href="/converso-audio-extraction/api-reference/status">
+  Track progress and retrieve job details.
 </Card>
 
 ---

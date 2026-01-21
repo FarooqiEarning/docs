@@ -10,45 +10,6 @@
   "navigation": {
     "products": [
       {
-        "product": "Converso Whatsapp Ap",
-        "tabs": [
-          {
-            "tab": "Guides",
-            "groups": [
-              {
-                "group": "Getting started",
-                "pages": [
-                  "index-copied-1",
-                  "quickstart-copied-1"
-                ]
-              }
-            ]
-          },
-          {
-            "tab": "API reference",
-            "groups": [
-              {
-                "group": "API documentation",
-                "pages": [
-                  "api-reference/introduction-copied-1"
-                ]
-              },
-              {
-                "group": "Endpoints",
-                "pages": [
-                  {
-                    "group": "Messages",
-                    "pages": [
-                      "api-reference/endpoints/messages/send-text-message-copied-1"
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
         "product": "Converso AudioExtract API",
         "pages": [
           "converso-audio-extract-api/introduction",
@@ -68,17 +29,10 @@
         "label": "Support",
         "href": "mailto:support@conversowmpire.world"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
+    ]
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
      "chatgpt",
      "claude",
      "perplexity",
