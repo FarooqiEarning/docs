@@ -10,7 +10,7 @@
   "navigation": {
     "products": [
       {
-        "product": "Converso Whatsapp Api",
+        "product": "Converso Whatsapp Ap",
         "tabs": [
           {
             "tab": "Guides",
@@ -50,23 +50,12 @@
       },
       {
         "product": "Converso AudioExtract API",
-        "tabs": [
+        "pages": [
+          "converso-audio-extract-api/introduction",
           {
-            "tab": "Get Started",
+            "group": "Api Reference",
             "pages": [
-              "converso-audio-extract-api/introduction"
-            ]
-          },
-          {
-            "tab": "Api Reference",
-            "icon": "code",
-            "groups": [
-              {
-                "group": "Api",
-                "pages": [
-                  "converso-audio-extract-api/api-reference/api/untitled-page"
-                ]
-              }
+              "converso-audio-extract-api/api-reference/api/untitled-page"
             ]
           }
         ]
