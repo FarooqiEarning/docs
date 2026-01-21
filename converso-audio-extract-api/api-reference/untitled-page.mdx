@@ -1,0 +1,223 @@
+---
+title: "API Reference"
+description: "Technical reference for the Converso Audio Extraction API"
+---
+
+## Overview
+
+This section provides the **complete technical reference** for the **Converso Audio Extraction API**.
+
+Here you'll find:
+- Endpoint definitions
+- Request and response schemas
+- Authentication requirements
+- Error formats
+- Webhook payload structures
+
+If you're new, we recommend reading the **Introduction** and **Quickstart** first.
+
+---
+
+## Base URL
+
+All API requests are made to:
+
+```text
+https://api.conversoempire.world/audio-extract
+```
+
+---
+
+## Authentication
+
+All endpoints require an API key.
+
+### Required Header
+
+```http
+X-API-Key: YOUR_API_KEY
+```
+
+Requests without a valid API key will be rejected.
+
+---
+
+## Content Type
+
+Unless otherwise specified, requests and responses use JSON.
+
+```http
+Content-Type: application/json
+```
+
+---
+
+## API Design Principles
+
+The Converso Audio Extraction API follows consistent patterns:
+
+* **Asynchronous job-based processing**
+* **Predictable RESTful endpoints**
+* **Consistent response envelopes**
+* **Explicit error codes**
+* **Stateless requests**
+
+---
+
+## Response Structure
+
+Most endpoints return a standard response object.
+
+### Success Response
+
+```json
+{
+  "success": true,
+  "data": {},
+  "message": "Optional human-readable message"
+}
+```
+
+### Error Response
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "ERROR_CODE",
+    "message": "Human-readable error message",
+    "details": "Optional additional information"
+  }
+}
+```
+
+---
+
+## Job Lifecycle
+
+Most API operations revolve around **jobs**.
+
+### Job Status Values
+
+| Status       | Description                    |
+| ------------ | ------------------------------ |
+| `queued`     | Job is waiting to be processed |
+| `processing` | Job is actively running        |
+| `completed`  | Job finished successfully      |
+| `failed`     | Job failed with an error       |
+
+### Processing Steps
+
+* `downloading_video`
+* `analyzing_video`
+* `extracting_audio`
+* `finalizing`
+
+---
+
+## File Retention Policy
+
+* Extracted audio files are stored temporarily
+* Default retention period: **24 hours**
+* After expiration, downloads will return an error
+
+---
+
+## Rate Limits
+
+Rate limits depend on your plan and subscription tier.
+
+If you exceed your limits, you may receive:
+
+* `429 Too Many Requests`
+* `503 Service Unavailable`
+
+> For production workloads, use **batch processing** and **webhooks** to reduce API calls.
+
+---
+
+## Available Endpoints
+
+<Card
+  title="Health Check"
+  icon="heart-pulse"
+  href="/converso-audio-extraction/api-reference/health"
+>
+Check API availability and system status.
+</Card>
+
+<Card
+  title="Create Extraction Job"
+  icon="plus"
+  href="/converso-audio-extraction/api-reference/extract"
+>
+Submit a new audio extraction job.
+</Card>
+
+<Card
+  title="Get Job Status"
+  icon="spinner"
+  href="/converso-audio-extraction/api-reference/status"
+>
+Track job progress and metadata.
+</Card>
+
+<Card
+  title="Download Audio"
+  icon="download"
+  href="/converso-audio-extraction/api-reference/download"
+>
+Download extracted audio files.
+</Card>
+
+<Card
+  title="Batch Processing"
+  icon="layer-group"
+  href="/converso-audio-extraction/api-reference/batch"
+>
+Process multiple extraction jobs at once.
+</Card>
+
+<Card
+  title="Errors"
+  icon="triangle-exclamation"
+  href="/converso-audio-extraction/api-reference/errors"
+>
+Error codes and troubleshooting.
+</Card>
+
+<Card
+  title="Webhooks"
+  icon="bell"
+  href="/converso-audio-extraction/api-reference/webhooks"
+>
+Event notifications for job completion and failure.
+</Card>
+
+---
+
+## Versioning
+
+The current API version is:
+
+```text
+v1
+```
+
+Future versions will be released without breaking existing integrations whenever possible.
+
+---
+
+## Need Help?
+
+<Card
+  title="Converso Empire Support"
+  icon="life-ring"
+  href="https://conversoempire.world/support"
+>
+Get help with integration, debugging, or production issues.
+</Card>
+
+---
+
+© Converso Empire. All rights reserved.

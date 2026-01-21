@@ -10,45 +10,6 @@
   "navigation": {
     "products": [
       {
-        "product": "Converso Empire",
-        "tabs": [
-          {
-            "tab": "Guides",
-            "groups": [
-              {
-                "group": "Getting started",
-                "pages": [
-                  "index",
-                  "quickstart"
-                ]
-              }
-            ]
-          },
-          {
-            "tab": "API reference",
-            "groups": [
-              {
-                "group": "API documentation",
-                "pages": [
-                  "api-reference/introduction"
-                ]
-              },
-              {
-                "group": "Endpoints",
-                "pages": [
-                  {
-                    "group": "Messages",
-                    "pages": [
-                      "api-reference/endpoints/messages/send-text-message"
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
         "product": "Converso Whatsapp Api",
         "tabs": [
           {
@@ -81,6 +42,29 @@
                       "api-reference/endpoints/messages/send-text-message-copied-1"
                     ]
                   }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "product": "Converso AudioExtract API",
+        "tabs": [
+          {
+            "tab": "Get Started",
+            "pages": [
+              "converso-audio-extract-api/introduction"
+            ]
+          },
+          {
+            "tab": "Api Reference",
+            "icon": "code",
+            "groups": [
+              {
+                "group": "Api",
+                "pages": [
+                  "converso-audio-extract-api/api-reference/api/untitled-page"
                 ]
               }
             ]

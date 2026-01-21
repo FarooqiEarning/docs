@@ -1,0 +1,140 @@
+---
+title: "Converso Audio Extraction API"
+description: "High-performance API for extracting professional-quality audio from video files"
+---
+
+## Overview
+
+The **Converso Audio Extraction API** is a powerful, scalable service that allows developers to **extract high-quality audio from video files** using a modern, asynchronous processing system.
+
+It is built for **production workloads**, enabling reliable audio conversion for automation, media processing, AI pipelines, and large-scale content platforms.
+
+---
+
+## Why Converso Audio Extraction?
+
+Modern applications need more than simple file conversion. Converso Audio Extraction is designed to be:
+
+- ⚡ **Fast & asynchronous** — never block your application
+- 📈 **Scalable** — handle single files or large batches
+- 🎧 **High quality** — professional-grade audio output
+- 🔔 **Event-driven** — webhooks for real-time updates
+- 🔒 **Secure** — API key–based authentication
+
+---
+
+## Key Capabilities
+
+### 🎬 Video to Audio Extraction
+Extract audio from video files in multiple industry-standard formats with precise control over quality and encoding.
+
+### 🌐 URL-Based Processing
+Process videos directly from public URLs without manual uploads.
+
+### ⏳ Asynchronous Jobs
+All operations run as background jobs, allowing you to:
+- Submit a job
+- Continue your workflow
+- Retrieve results when ready
+
+### 🔁 Batch Processing
+Convert multiple videos in a single request for efficient bulk workflows.
+
+### 🔔 Webhook Notifications
+Receive instant notifications when jobs complete or fail—no polling required.
+
+---
+
+## Supported Formats
+
+### Input (Video)
+The API supports a wide range of common video formats, including:
+
+```
+mp4, mkv, webm, avi, mov, flv, m4v, ts,
+wmv, mpg, mpeg, 3gp, ogv, f4v, vob
+```
+
+### Output (Audio)
+
+- **MP3** – up to 320 kbps
+- **AAC** – up to 256 kbps
+- **FLAC** – lossless audio
+- **WAV** – uncompressed
+- **OGG** – high-quality Vorbis
+- **OPUS** – modern low-latency codec
+
+---
+
+## Typical Workflow
+
+```text
+1. Submit an extraction job
+2. Job is queued and processed
+3. Monitor status or wait for webhook
+4. Download extracted audio
+```
+
+This approach ensures reliability and scalability, even for large files.
+
+---
+
+## Common Use Cases
+
+* 🎙 Podcast generation
+* 🎵 Music extraction
+* 🤖 AI speech & transcription pipelines
+* 📹 Media processing platforms
+* 📚 Dataset preparation
+* 🔊 Audio analysis workflows
+
+---
+
+## Authentication
+
+All Converso APIs use **API key–based authentication**.
+
+Your API key must be included in every request header.
+
+```http
+X-API-Key: YOUR_API_KEY
+```
+
+> 🔐 Keep your API key secure. Do not expose it in frontend or public repositories.
+
+---
+
+## Reliability & Retention
+
+* Jobs are processed reliably with real-time progress tracking
+* Output files are securely stored
+* Completed files are retained for a limited time (default: **24 hours**)
+
+---
+
+## What's Next?
+
+<Card
+  title="API Reference"
+  icon="terminal"
+  href="/converso-audio-extraction/api-reference/introduction"
+  horizontal
+>
+Explore detailed endpoints, request schemas, responses, and examples.
+</Card>
+
+---
+
+## Support
+
+<Card
+  title="Converso Empire Support"
+  icon="life-ring"
+  href="https://conversoempire.world/support"
+>
+Get help, report issues, or request features.
+</Card>
+
+---
+
+© Converso Empire. All rights reserved.

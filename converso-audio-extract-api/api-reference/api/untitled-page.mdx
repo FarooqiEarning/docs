@@ -1,0 +1,268 @@
+---
+title: "Create Extraction Job"
+description: "Submit a new audio extraction job from a video source"
+---
+
+## Endpoint
+
+```http
+POST /v1/extract
+```
+
+Submits a new **audio extraction job**.
+The request is processed **asynchronously** and returns immediately with a job ID.
+
+---
+
+## Authentication
+
+This endpoint requires an API key.
+
+```http
+X-API-Key: YOUR_API_KEY
+```
+
+Requests without a valid API key will be rejected.
+
+---
+
+## Description
+
+The **Create Extraction Job** endpoint queues a background job that:
+
+1. Validates the request
+2. Downloads the video (if source is a URL)
+3. Analyzes video properties
+4. Extracts and converts audio
+5. Stores the output temporarily for download
+
+The job lifecycle can be tracked using the **Job Status API** or **webhooks**.
+
+---
+
+## Request Body
+
+The request body must be JSON and include **source** and **output** objects.
+
+### Required Fields
+
+| Field    | Type   | Description                |
+| -------- | ------ | -------------------------- |
+| `source` | object | Video input configuration  |
+| `output` | object | Audio output configuration |
+
+### Optional Fields
+
+| Field     | Type   | Description                                     |
+| --------- | ------ | ----------------------------------------------- |
+| `options` | object | Job-level options (webhook, filename, priority) |
+
+---
+
+## Source Object
+
+Defines where the video comes from.
+
+```json
+{
+  "type": "url",
+  "url": "https://example.com/video.mp4"
+}
+```
+
+| Field  | Required        | Description                       |
+| ------ | --------------- | --------------------------------- |
+| `type` | ✅               | `url` or `upload`                 |
+| `url`  | ✅ (if type=url) | Public video URL                  |
+| `file` | ❌               | File identifier (upload – future) |
+
+---
+
+## Output Object
+
+Controls audio format and quality.
+
+```json
+{
+  "format": "mp3",
+  "quality": "medium",
+  "normalize": true
+}
+```
+
+| Field              | Required | Description                    |
+| ------------------ | -------- | ------------------------------ |
+| `format`           | ✅        | mp3, aac, flac, wav, ogg, opus |
+| `quality`          | ❌        | low, medium, high, extreme     |
+| `bitrate`          | ❌        | Custom bitrate (e.g. `192k`)   |
+| `normalize`        | ❌        | Loudness normalization         |
+| `preserveMetadata` | ❌        | Preserve original metadata     |
+
+📌 If `bitrate` is provided, it overrides `quality`.
+
+---
+
+## Options Object
+
+Optional job-level settings.
+
+```json
+{
+  "filename": "my-audio-file",
+  "webhook": "https://example.com/webhook",
+  "priority": "high"
+}
+```
+
+| Field      | Description                |
+| ---------- | -------------------------- |
+| `filename` | Custom output filename     |
+| `webhook`  | Webhook URL for job events |
+| `priority` | low, normal, high          |
+
+---
+
+## Example Requests
+
+### Basic MP3 Extraction
+
+```json
+{
+  "source": {
+    "type": "url",
+    "url": "https://example.com/video.mp4"
+  },
+  "output": {
+    "format": "mp3",
+    "quality": "medium"
+  }
+}
+```
+
+---
+
+### High-Quality FLAC with Metadata
+
+```json
+{
+  "source": {
+    "type": "url",
+    "url": "https://example.com/video.mp4"
+  },
+  "output": {
+    "format": "flac",
+    "normalize": true,
+    "preserveMetadata": true
+  },
+  "options": {
+    "filename": "studio-audio",
+    "webhook": "https://example.com/webhook"
+  }
+}
+```
+
+---
+
+### Custom Bitrate MP3
+
+```json
+{
+  "source": {
+    "type": "url",
+    "url": "https://example.com/video.mp4"
+  },
+  "output": {
+    "format": "mp3",
+    "bitrate": "256k"
+  }
+}
+```
+
+---
+
+## Response
+
+### Success (202 Accepted)
+
+```json
+{
+  "success": true,
+  "data": {
+    "jobId": "job_a1b2c3d4e5f6g7h8",
+    "status": "queued",
+    "estimatedTime": 45,
+    "statusUrl": "/v1/status/job_a1b2c3d4e5f6g7h8"
+  },
+  "message": "Job queued successfully"
+}
+```
+
+| Field           | Description                     |
+| --------------- | ------------------------------- |
+| `jobId`         | Unique job identifier           |
+| `status`        | Initial job status              |
+| `estimatedTime` | Estimated seconds to completion |
+| `statusUrl`     | Endpoint to check progress      |
+
+---
+
+## Error Responses
+
+### 400 – Bad Request
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "INVALID_REQUEST",
+    "message": "Invalid output format"
+  }
+}
+```
+
+### 503 – Service Unavailable
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "QUEUE_FULL",
+    "message": "Processing queue is currently full"
+  }
+}
+```
+
+---
+
+## Limits & Constraints
+
+* Max file size: **5 GB**
+* Max URL length: **2048 characters**
+* Files retained: **24 hours**
+* Upload source: **planned (not yet available)**
+
+---
+
+## Best Practices
+
+* ✅ Prefer **webhooks** over polling
+* 🔁 Retry failures with exponential backoff
+* 📦 Use **batch API** for multiple files
+* 🔐 Keep API keys secure
+* ⏳ Expect longer processing for large videos
+
+---
+
+## Next Step
+
+<Card
+  title="Get Job Status"
+  icon="spinner"
+  href="/converso-audio-extraction/api-reference/status"
+>
+Track progress and retrieve job details.
+</Card>
+
+---
+
+© Converso Empire. All rights reserved.
