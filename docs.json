@@ -59,5 +59,7 @@
     "playground": {
       "display": "interactive"
     }
-  }
+  },
+  "favicon": "/images/logo.ico",
+  "logo": "/images/logo.png"
 }
