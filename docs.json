@@ -136,6 +136,18 @@
               "converso-whatsapp-api/v2/api-reference/integrations/websocket/set-websocket",
               "converso-whatsapp-api/v2/api-reference/integrations/websocket/find-websocket"
             ]
+          },
+          {
+            "group": "Privacy Policy",
+            "pages": [
+              "converso-whatsapp-api/v2/privacy-policy"
+            ]
+          },
+          {
+            "group": "Terms & Conditions",
+            "pages": [
+              "converso-whatsapp-api/v2/terms-conditions"
+            ]
           }
         ]
       }
