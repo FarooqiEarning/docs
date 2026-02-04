@@ -28,18 +28,8 @@
       },
       {
         "product": "Converso WhatsApp API",
-        "versions": [
-          "v2"
-        ],
         "openapi": [
-          "https://cdn.conversoempire.world/converso-wahtsapp-api-openapi-v2.json"
-        ],
-        "tabs": [
-          {
-            "name": "API",
-            "url": "v2/api-reference",
-            "version": "v2"
-          }
+          "https://cdn.conversoempire.world/converso-whatsapp-api-openapi-v2.json"
         ],
         "pages": [
           {
@@ -269,7 +259,7 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:support@conversowmpire.world"
+        "href": "mailto:support@conversoempire.world"
       }
     ]
   },
