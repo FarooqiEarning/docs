@@ -32,7 +32,7 @@
           "v2"
         ],
         "openapi": [
-          "/openapi/openapi-fixed.json"
+          "https://cdn.conversoempire.world/converso-wahtsapp-api-openapi-v2.json"
         ],
         "tabs": [
           {
