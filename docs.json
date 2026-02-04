@@ -14,7 +14,7 @@
         "pages": [
           "converso-audio-extract-api/introduction",
           {
-            "group": "Api Reference",
+            "group": "API Reference",
             "pages": [
               "converso-audio-extract-api/api-reference/api/create-extraction-job",
               "converso-audio-extract-api/api-reference/get-job-status",
@@ -22,6 +22,243 @@
               "converso-audio-extract-api/api-reference/batch-processing",
               "converso-audio-extract-api/api-reference/webhooks",
               "converso-audio-extract-api/api-reference/errors-reference"
+            ]
+          }
+        ]
+      },
+      {
+        "product": "Converso WhatsApp API",
+        "versions": [
+          "v2"
+        ],
+        "openapi": [
+          "/openapi/openapi-fixed.json"
+        ],
+        "tabs": [
+          {
+            "name": "API",
+            "url": "v2/api-reference",
+            "version": "v2"
+          }
+        ],
+        "pages": [
+          {
+            "group": "Start",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/get-information"
+            ]
+          },
+          {
+            "group": "Instances",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/instance-controller/create-instance-basic",
+              "converso-whatsapp-api/v2/api-reference/instance-controller/fetch-instances",
+              "converso-whatsapp-api/v2/api-reference/instance-controller/instance-connect",
+              "converso-whatsapp-api/v2/api-reference/instance-controller/restart-instance",
+              "converso-whatsapp-api/v2/api-reference/instance-controller/connection-state",
+              "converso-whatsapp-api/v2/api-reference/instance-controller/logout-instance",
+              "converso-whatsapp-api/v2/api-reference/instance-controller/delete-instance",
+              "converso-whatsapp-api/v2/api-reference/instance-controller/set-presence"
+            ]
+          },
+          {
+            "group": "Send Message",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/message-controller/send-text",
+              "converso-whatsapp-api/v2/api-reference/message-controller/send-media",
+              "converso-whatsapp-api/v2/api-reference/message-controller/send-audio",
+              "converso-whatsapp-api/v2/api-reference/message-controller/send-sticker"
+            ]
+          },
+          {
+            "group": "Webhook",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/webhook/set",
+              "converso-whatsapp-api/v2/api-reference/webhook/get"
+            ]
+          },
+          {
+            "group": "Settings",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/settings/set",
+              "converso-whatsapp-api/v2/api-reference/settings/get"
+            ]
+          },
+          {
+            "group": "Chat Controller",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/chat-controller/check-is-whatsapp",
+              "converso-whatsapp-api/v2/api-reference/chat-controller/mark-as-read",
+              "converso-whatsapp-api/v2/api-reference/chat-controller/mark-as-unread",
+              "converso-whatsapp-api/v2/api-reference/chat-controller/archive-chat",
+              "converso-whatsapp-api/v2/api-reference/chat-controller/delete-message-for-everyone",
+              "converso-whatsapp-api/v2/api-reference/chat-controller/update-message",
+              "converso-whatsapp-api/v2/api-reference/chat-controller/send-presence",
+              "converso-whatsapp-api/v2/api-reference/chat-controller/updateBlockStatus",
+              "converso-whatsapp-api/v2/api-reference/chat-controller/fetch-profilepic-url",
+              "converso-whatsapp-api/v2/api-reference/chat-controller/get-base64",
+              "converso-whatsapp-api/v2/api-reference/chat-controller/find-contacts",
+              "converso-whatsapp-api/v2/api-reference/chat-controller/find-messages",
+              "converso-whatsapp-api/v2/api-reference/chat-controller/find-status-message",
+              "converso-whatsapp-api/v2/api-reference/chat-controller/find-chats"
+            ]
+          },
+          {
+            "group": "Profile Settings",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/profile-settings/fetch-business-profile",
+              "converso-whatsapp-api/v2/api-reference/profile-settings/fetch-profile",
+              "converso-whatsapp-api/v2/api-reference/profile-settings/update-profile-name",
+              "converso-whatsapp-api/v2/api-reference/profile-settings/update-profile-status",
+              "converso-whatsapp-api/v2/api-reference/profile-settings/update-profile-picture",
+              "converso-whatsapp-api/v2/api-reference/profile-settings/remove-profile-picture",
+              "converso-whatsapp-api/v2/api-reference/profile-settings/fetch-privacy-settings",
+              "converso-whatsapp-api/v2/api-reference/profile-settings/update-privacy-settings"
+            ]
+          },
+          {
+            "group": "Group Controller",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/group-controller/group-create",
+              "converso-whatsapp-api/v2/api-reference/group-controller/update-group-picture",
+              "converso-whatsapp-api/v2/api-reference/group-controller/update-group-subject",
+              "converso-whatsapp-api/v2/api-reference/group-controller/update-group-description",
+              "converso-whatsapp-api/v2/api-reference/group-controller/fetch-invite-code",
+              "converso-whatsapp-api/v2/api-reference/group-controller/revoke-invite-code",
+              "converso-whatsapp-api/v2/api-reference/group-controller/send-invite-url",
+              "converso-whatsapp-api/v2/api-reference/group-controller/find-group-by-invite-code",
+              "converso-whatsapp-api/v2/api-reference/group-controller/find-group-by-jid",
+              "converso-whatsapp-api/v2/api-reference/group-controller/fetch-all-groups",
+              "converso-whatsapp-api/v2/api-reference/group-controller/find-participants",
+              "converso-whatsapp-api/v2/api-reference/group-controller/update-participant",
+              "converso-whatsapp-api/v2/api-reference/group-controller/update-setting",
+              "converso-whatsapp-api/v2/api-reference/group-controller/toggle-ephemeral",
+              "converso-whatsapp-api/v2/api-reference/group-controller/leave-group"
+            ]
+          },
+          {
+            "group": "Typebot",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/integrations/typebot/set-typebot",
+              "converso-whatsapp-api/v2/api-reference/integrations/typebot/start-typebot",
+              "converso-whatsapp-api/v2/api-reference/integrations/typebot/find-typebot",
+              "converso-whatsapp-api/v2/api-reference/integrations/typebot/fetch-typebot",
+              "converso-whatsapp-api/v2/api-reference/integrations/typebot/update-typebot",
+              "converso-whatsapp-api/v2/api-reference/integrations/typebot/delete-typebot",
+              "converso-whatsapp-api/v2/api-reference/integrations/typebot/change-session-status",
+              "converso-whatsapp-api/v2/api-reference/integrations/typebot/fetch-session",
+              "converso-whatsapp-api/v2/api-reference/integrations/typebot/settings-typebot",
+              "converso-whatsapp-api/v2/api-reference/integrations/typebot/find-settings-typebot"
+            ]
+          },
+          {
+            "group": "OpenAI",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/integrations/openai/create-bot",
+              "converso-whatsapp-api/v2/api-reference/integrations/openai/find-bot",
+              "converso-whatsapp-api/v2/api-reference/integrations/openai/find-bots",
+              "converso-whatsapp-api/v2/api-reference/integrations/openai/update-bot",
+              "converso-whatsapp-api/v2/api-reference/integrations/openai/delete-bot",
+              "converso-whatsapp-api/v2/api-reference/integrations/openai/find-creds-openai",
+              "converso-whatsapp-api/v2/api-reference/integrations/openai/set-creds",
+              "converso-whatsapp-api/v2/api-reference/integrations/openai/delete-creds",
+              "converso-whatsapp-api/v2/api-reference/integrations/openai/settings-openai",
+              "converso-whatsapp-api/v2/api-reference/integrations/openai/find-settings",
+              "converso-whatsapp-api/v2/api-reference/integrations/openai/change-status",
+              "converso-whatsapp-api/v2/api-reference/integrations/openai/find-session"
+            ]
+          },
+          {
+            "group": "Evolution Bot",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/integrations/evolution/create-bot",
+              "converso-whatsapp-api/v2/api-reference/integrations/evolution/find-bot",
+              "converso-whatsapp-api/v2/api-reference/integrations/evolution/fetch-bots",
+              "converso-whatsapp-api/v2/api-reference/integrations/evolution/update",
+              "converso-whatsapp-api/v2/api-reference/integrations/evolution/delete-bot",
+              "converso-whatsapp-api/v2/api-reference/integrations/evolution/set-settings",
+              "converso-whatsapp-api/v2/api-reference/integrations/evolution/find-settings",
+              "converso-whatsapp-api/v2/api-reference/integrations/evolution/change-status-session",
+              "converso-whatsapp-api/v2/api-reference/integrations/evolution/fetch-session"
+            ]
+          },
+          {
+            "group": "Dify",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/integrations/dify/create-dify",
+              "converso-whatsapp-api/v2/api-reference/integrations/dify/find-dify",
+              "converso-whatsapp-api/v2/api-reference/integrations/dify/find-bot-dify",
+              "converso-whatsapp-api/v2/api-reference/integrations/dify/update-dify",
+              "converso-whatsapp-api/v2/api-reference/integrations/dify/set-settings-dify",
+              "converso-whatsapp-api/v2/api-reference/integrations/dify/find-settings",
+              "converso-whatsapp-api/v2/api-reference/integrations/dify/change-status",
+              "converso-whatsapp-api/v2/api-reference/integrations/dify/find-status"
+            ]
+          },
+          {
+            "group": "n8n",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/integrations/n8n/create-n8n",
+              "converso-whatsapp-api/v2/api-reference/integrations/n8n/find-n8n",
+              "converso-whatsapp-api/v2/api-reference/integrations/n8n/update-n8n",
+              "converso-whatsapp-api/v2/api-reference/integrations/n8n/set-settings-n8n",
+              "converso-whatsapp-api/v2/api-reference/integrations/n8n/find-settings",
+              "converso-whatsapp-api/v2/api-reference/integrations/n8n/change-status",
+              "converso-whatsapp-api/v2/api-reference/integrations/n8n/find-status"
+            ]
+          },
+          {
+            "group": "EvoAI",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/integrations/evoai/create-evoai",
+              "converso-whatsapp-api/v2/api-reference/integrations/evoai/find-evoai",
+              "converso-whatsapp-api/v2/api-reference/integrations/evoai/update-evoai",
+              "converso-whatsapp-api/v2/api-reference/integrations/evoai/set-settings-evoai",
+              "converso-whatsapp-api/v2/api-reference/integrations/evoai/find-settings",
+              "converso-whatsapp-api/v2/api-reference/integrations/evoai/change-status",
+              "converso-whatsapp-api/v2/api-reference/integrations/evoai/find-status"
+            ]
+          },
+          {
+            "group": "Flowise",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/integrations/flowise/create-bot",
+              "converso-whatsapp-api/v2/api-reference/integrations/flowise/find-flowise-bots",
+              "converso-whatsapp-api/v2/api-reference/integrations/flowise/find-flowise-bot",
+              "converso-whatsapp-api/v2/api-reference/integrations/flowise/update-flowise-bot",
+              "converso-whatsapp-api/v2/api-reference/integrations/flowise/delete-flowise-bot",
+              "converso-whatsapp-api/v2/api-reference/integrations/flowise/set-settings",
+              "converso-whatsapp-api/v2/api-reference/integrations/flowise/find-settings",
+              "converso-whatsapp-api/v2/api-reference/integrations/flowise/change-session-status",
+              "converso-whatsapp-api/v2/api-reference/integrations/flowise/find-sessions"
+            ]
+          },
+          {
+            "group": "Chatwoot",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/integrations/chatwoot/set-chatwoot",
+              "converso-whatsapp-api/v2/api-reference/integrations/chatwoot/find-chatwoot"
+            ]
+          },
+          {
+            "group": "Websocket",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/integrations/websocket/set-websocket",
+              "converso-whatsapp-api/v2/api-reference/integrations/websocket/find-websocket"
+            ]
+          },
+          {
+            "group": "SQS",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/integrations/sqs/set-sqs",
+              "converso-whatsapp-api/v2/api-reference/integrations/sqs/find-sqs"
+            ]
+          },
+          {
+            "group": "RabbitMQ",
+            "pages": [
+              "converso-whatsapp-api/v2/api-reference/integrations/rabbitmq/set-rabbitmq",
+              "converso-whatsapp-api/v2/api-reference/integrations/rabbitmq/find-rabbitmq"
             ]
           }
         ]
@@ -38,13 +275,13 @@
   },
   "contextual": {
     "options": [
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "footer": {
     "socials": {
